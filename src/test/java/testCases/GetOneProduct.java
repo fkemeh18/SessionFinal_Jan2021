@@ -14,12 +14,14 @@ public class GetOneProduct {
 	@Test
 	public static void get_A_Product() {
 		
+		String queryPath = ".\\src\\main\\java\\data\\getQueryParam.json";
+		
 		//https://techfios.com/api-prod/api/product/read.php
 		Response response = 
 				given()
 					.baseUri("https://techfios.com/api-prod/api/product")
 					.header("ContentType","application/json; charset=UTF-8")
-					.queryParam("id", "2740")
+					.queryParam("id", "2734")
 				.when()
 					.get("/read_one.php")
 				.then() //.assertThat().statusCode(200);
@@ -42,17 +44,17 @@ public class GetOneProduct {
 		
 		System.out.println("Response: " + responseBody);
 		
-		String productName = jp.getString("name");
-		System.out.println("Product name: " + productName);
-		Assert.assertEquals(productName, "SID's Amazing Pillow 3.0");
-		
-		String productDesc = jp.getString("description");
-		System.out.println("Product description: " + productDesc);
-		Assert.assertEquals(productDesc, "The best pillow for amazing programmers.");
-		
-		String productPrice = jp.getString("price");
-		System.out.println("Product price: " + productPrice);
-		Assert.assertEquals(productPrice, "299");
+//		String productName = jp.getString("name");
+//		System.out.println("Product name: " + productName);
+//		Assert.assertEquals(productName, "SID's Amazing Pillow 3.0");
+//		
+//		String productDesc = jp.getString("description");
+//		System.out.println("Product description: " + productDesc);
+//		Assert.assertEquals(productDesc, "The best pillow for amazing programmers.");
+//		
+//		String productPrice = jp.getString("price");
+//		System.out.println("Product price: " + productPrice);
+//		Assert.assertEquals(productPrice, "299");
 	}
 	
 }

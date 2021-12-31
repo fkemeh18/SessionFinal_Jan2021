@@ -13,12 +13,12 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
-public class CreateAProduct {
+public class UpdateAProduct {
 
 	@Test
-	public static void create_A_Product() {
+	public static void update_A_Product() {
 		
-		String payloadPath = ".\\src\\main\\java\\data\\payload.json";
+		String payloadPath = ".\\src\\main\\java\\data\\updatedPayload.json";
 		
 //		HashMap<String, String> payload = new HashMap<String, String>();
 //		payload.put("name","DatBai2.0");
@@ -28,16 +28,21 @@ public class CreateAProduct {
 		
 		Response response = 
 				given()
-					.log().all()
+//					.log().all()
 					.baseUri("https://techfios.com/api-prod/api/product")
 					.header("ContentType","application/json;")
 					.body(new File (payloadPath))
 				.when()
-					.log().all()
-					.post("/create.php")
+//					.log().all()
+					.put("/update.php")
 				.then() //.assertThat().statusCode(200);
 					.log().all()
 					.extract().response();
+		
+		String responseBody = response.getBody().asPrettyString();
+		JsonPath jp = new JsonPath(responseBody);
+		String successMessage = jp.getString("message");
+		Assert.assertEquals(successMessage, "Product was updated.");
 		
 //		long responseTime = response.getTimeIn(TimeUnit.MILLISECONDS);
 //		long expectedResponseTime = 2000;
